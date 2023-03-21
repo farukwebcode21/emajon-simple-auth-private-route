@@ -1,24 +1,47 @@
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./SignUp.css";
 
 const SignUp = () => {
+  const [error, setError] = useState(null);
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+    console.log(email, password, confirmPassword);
+    if (password.length < 6) {
+      setError("Password should be 6 characete long");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setError("Your Password did not match");
+      return;
+    }
+  };
   return (
     <div className="form-container">
       <div>
         <h2 className="form-title">Sign Up</h2>
-        <form>
+        <form onSubmit={handleSignUp}>
           <div className="input-group">
             <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="" required />
+            <input type="email" name="email" id="email" required />
           </div>
           <div className="input-group">
             <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="" required />
+            <input type="password" name="password" id="password" required />
           </div>
           <div className="input-group">
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <input type="password" name="confirm-password" id="" />
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              id="confirmPassword"
+            />
           </div>
           <input
             className="form-submit"
@@ -33,6 +56,7 @@ const SignUp = () => {
             Login
           </Link>
         </p>
+        <p className="text-error">{error}</p>
       </div>
     </div>
   );

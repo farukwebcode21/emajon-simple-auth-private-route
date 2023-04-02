@@ -8,6 +8,7 @@ const About = () => {
   return (
     <div>
       <h2>Secret about us!!!</h2>
+      <span>{user?.email}</span>
     </div>
   );
 };

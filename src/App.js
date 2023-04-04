@@ -29,10 +29,14 @@ function App() {
         },
         {
           path: "inventory",
-          element: <Inventory></Inventory>,
+          element: (
+            <PrivateRoute>
+              <Inventory />
+            </PrivateRoute>
+          ),
         },
         {
-          path: "/shipping",
+          path: "shipping",
           element: (
             <PrivateRoute>
               <Shipping />
